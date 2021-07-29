@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DistroPayment</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'merchant', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+  </head>
+
+  <body>
+    <header class="profile-header">
+        <div class="container">
+            <div class="navigation d-flex align-items-center justify-content-between shadow">
+                <div class="logo">
+                  <%= image_tag 'distro-logo.svg' %>
+
+                </div>
+
+                <div class="nav-right">
+                    <ul>
+                        <li>
+                            <a href="/">Home</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <!-- Profile Sidebar -->
+    <section class="profile-sidebar">
+        <div class="container">
+          <% flash.try(:each) do |name, msg| %>
+            <div class="alert-message">
+              <div class="alert alert-warning alert-dismissible fade shadow show" role="alert">
+                <%= msg %>
+                <a type="button" class="btn-close-alert" data-bs-dismiss="alert" aria-label="Close">&times</a>
+              </div>
+            </div>
+          <% end %>
+            <div class="row">
+               <% if controller.action_name != "thankyou"%>
+                <div class="col-lg-4 col-md-12 col-sm-12 pl-0">
+                    <div class="bg shadow">
+                        <ul>
+                            <li>
+                                <a href="#" class="d-flex align-items-center">
+                                    <div class="number">1</div>
+                                    <div class="list">Tell us about your Business</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="d-flex align-items-center">
+                                    <div class="number">2</div>
+                                    <div class="list">Connect Your Bank Account</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="d-flex align-items-center">
+                                    <div class="number">3</div>
+                                    <div class="list">Verification Status</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <% end %>
+                <%= yield %>
+            </div>
+        </div>
+    </section>
+    <footer class="ft-profile container shadow">
+        <div class="d-flex justify-content-between">
+            <div class="left">
+                <ul>
+                    <li>
+                        <a href="<%= merchant_dashboard_index_path %>">Go to dashboard</a>
+                        <p>&copy; DistroPayment Black, and the stars had <br> ceased to twinkle.By the same illusion
+                            which lifts.</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="right">
+                <ul>
+                    <li>
+                        <a href="/terms">Terms & Conditions</a>
+                        <a href="/privacy">Privacy Policy</a>
+                        <a href="/faq">Frequently asked questions</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+  </body>
+
+</html>

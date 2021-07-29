@@ -1,0 +1,64 @@
+ <!-- Refund Modal Start -->
+ <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+ aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog refund_modal_dialog mx-auto" role="document">
+      <div class="modal-content refund_modal_body">
+          <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Refund Transaction </h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+        <%= form_with(url: merchant_do_payment_refund_path(id: params[:transaction_id]), method: :post, autocomplete: "off") do |form| %>
+          <div class="modal-body">
+                  <%= form.hidden_field :fee, value: @fee.refund %>
+                  <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="inputEmail4">Enter Amount</label>
+                    <%= form.text_field :amount, class: 'form-control', placeholder: "0.0", required: true, autocomplete: "off" %>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputState">Select Reason</label>
+                    <%= form.select :reason, Transaction::REASON, { prompt: "Select Reason" }, { class: "form-control", required: true } %>
+                  </div>
+                  </div>
+              <div class="row text-center">
+                  <div class="amount">Amount: <span id="amount-num">$0.00</span></div>&nbsp;
+                  <div class="fee pl-3" data-fee="<%= @fee.refund %>">Fee: <%= number_with_precision(number_to_currency(@fee.refund), precision: 2, delimeter: ',') %></div>&nbsp;
+                  <div class="total pl-3">Total: <span id="total-amount">$0.0</span></div>
+              </div>
+
+              <div class="alert alert-success shadow-sm mt-3" role="alert">
+                  <h4 class="alert-heading">Important Note</h4>
+                  <p>Please allow 2-5 business days for the refund to reflect on
+                      your customer's card statement.</p>
+                  <p class="mb-0"></p>
+              </div>
+
+          </div>
+          <div class="modal-footer justify-content-center">
+              <button type="button" class="btn btn-secondary btn_refund_cancel" data-bs-dismiss="modal" aria-label="Close">
+                  Cancel
+              </button>
+            <%= form.submit 'Refund', class:'btn btn-primary btn_refund_final' %>
+          </div>
+            <% end %>
+      </div>
+  </div>
+  </div>
+<!-- Refund Modal End-->
+<script type="text/javascript">
+  $("#amount").on('keyup',function(){
+    fee = parseFloat($(".fee").data("fee"))
+    amount =  $(this).val();
+    if (amount != "") {
+      total = fee + parseFloat($(this).val());
+      $("#amount-num").text("$"+parseFloat(amount).toFixed(2));
+    } else {
+      total = 0.00
+      $("#amount-num").text("$0.0");
+    }
+
+    $("#total-amount").text("$"+total.toFixed(2));
+  });
+</script>

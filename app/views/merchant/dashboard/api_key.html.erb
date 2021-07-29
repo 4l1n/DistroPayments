@@ -1,0 +1,103 @@
+<!-- Dashboard Main Start -->
+<div class="dash_body">
+    <div class="api_key_section">
+        <div class="container">
+            <div class="row text-center mb-3">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="welcom_heading">
+                        Api Keys </div>
+                    <!-- <div class="small_head pl-1">Your Accounts Dashboard</div> -->
+                </div>
+            </div>
+
+
+            <!-- Table Start -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="api_key_tab shadow mt-5">
+                        <div class="api_key_head">Standard Api Key</div>
+                        <div class="api_key_box">
+                            <div class="row text-center mt-3">
+                                <div class="col-lg-6">
+                                    <div class="sub_head">Type</div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="sub_head">Api Key</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="api_key_box active">
+                            <div class="row text-center mt-3">
+                                <div class="col-lg-6">
+                                    <div class="sub_head_two">Public Key</div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="sub_head_two" id="btn_copy"
+                                        data-clipboard-text="<%= current_user.public_key %>">
+                                        <%= current_user.public_key %> <i class="far fa-copy"></i></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="api_key_box">
+                            <div class="row text-center mt-3">
+                                <div class="col-lg-6">
+                                    <div class="sub_head_two">Secret Key</div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="secret">
+                                        <div class="sub_head_two secret_key" id="btn_copy"
+                                            data-clipboard-text="<%= current_user.secret_key %>">
+                                            <%= current_user.secret_key %> <i class="far fa-copy"></i></div>
+                                        <!-- <button  class="btn btn_secret">Click To Reveal</button> -->
+                                        <div class="click-reveal">
+                                            <i id="clicktorv" class="far fa-eye"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Target -->
+
+            </div>
+
+            <!-- Table End -->
+
+        </div>
+    </div>
+</div>
+<script>
+    // Remove keyboard shortcuts
+    // document.onkeydown = function (e) {
+    //       if (event.keyCode == 123) {
+    //           return false;
+    //       }
+    //       if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+    //           return false;
+    //       }
+    //       if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+    //           return false;
+    //       }
+    //       if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+    //           return false;
+    //       }
+    //       if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+    //           return false;
+    //       }
+    //   }
+
+    //   // Disable Inspect Element
+    //   $(document).bind("contextmenu", function (e) {
+    //       e.preventDefault();
+    //   });
+    //   $(document).keydown(function (e) {
+    //       if (e.which === 123) {
+    //           return false;
+    //       }
+    //   });
+</script>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DistroPayment</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/0.8.2/css/flag-icon.min.css">
+  </head>
+
+  <body>
+    <!-- Start Preloader Area -->
+    <!-- <div class="preloader">
+      <div class="loader">
+          <div class="shadow"></div>
+          <div class="box"></div>
+      </div>
+    </div> -->
+    <!-- End Preloader Area -->
+    <% if controller.action_name  != "docs"%>
+      <%= render partial: "shared/header" %>
+    <% end %>
+    <%= yield %>
+    <% if controller.action_name  != "docs"%>
+      <%= render partial: "shared/footer" %>
+    <% end %>
+    <script type="text/javascript">
+      function myFunction() {
+        var popup = document.getElementById("langPopup");
+        popup.classList.toggle("show");
+      }
+    </script>
+  </body>
+</html>

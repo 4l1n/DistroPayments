@@ -1,0 +1,211 @@
+<!-- Dashboard Main Start -->
+<div class="dashboard_main_page">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+               
+            </div>
+
+            <div class="col-md-6">
+
+            </div>
+        </div>
+
+        <!-- Transaction Details Start -->
+        <% if @transaction.present? %>
+        <div class="tran_det_head mt-1 mb-3">Transaction Details</div>
+        <div class="row">
+            <div class="col-md-7 mb-3">
+                <div class="transaction_detail_box shadow">
+                    <div class="head text-center">Transaction Overview</div>
+
+                    <div class="row">
+                        <div class="col-lg-6 pt-2 pb-2">
+                            <div class="trans_type_head">Transaction Type</div>
+                            <div class="trans_type_data"><%= @transaction.main_type.humanize.titleize %></div>
+                        </div>
+                        <div class="col-lg-6 pt-2 pb-2">
+                            <div class="trans_type_head">Transaction Date / Time</div>
+                            <div class="trans_type_data"><%= @transaction.created_at.strftime("%m/%d/%Y %H:%M %p") %></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 pt-2 pb-2">
+                            <div class="trans_type_head">Transaction ID</div>
+                            <div class="trans_type_data" id="btn_copy" data-clipboard-text="<%= @transaction.ref_id %>"><%= @transaction.ref_id.first(25) %>... <i class="far fa-copy"></i></div>
+                        </div>
+                        <div class="col-lg-6 pt-2 pb-2">
+                            <div class="trans_type_head">Transaction Status</div>
+                            <div class="trans_type_data"><%= @transaction.status.titleize %></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 pt-2 pb-2">
+                            <div class="trans_type_head">Transaction Action</div>
+                            <div class="trans_type_data"><%= @transaction.action.humanize.titleize %></div>
+                        </div>
+                    </div>
+                    <!-- Payment Information Start -->
+                    <div class="head text-center mt-2 mb-2">Payment Information</div>
+                    <div class="row">
+                        <div class="col-lg-6 pt-2 pb-2">
+                            <div class="trans_type_data">Amount</div>
+                        </div>
+                        <div class="col-lg-6 pt-2 pb-2">
+                            <div class="trans_type_data"><%= number_with_precision(number_to_currency(@transaction.amount),precision: 2, delimeter: ',') %></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 pt-2 pb-2">
+                            <div class="trans_type_data">Fee</div>
+                        </div>
+                        <div class="col-lg-6 pt-2 pb-2">
+                            <div class="trans_type_data">-<%= number_with_precision(number_to_currency(@transaction.fee.to_f),precision: 2, delimeter: ',') %></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 pt-2 pb-2">
+                            <div class="trans_type_data">Bank Fee</div>
+                        </div>
+                        <div class="col-lg-6 pt-2 pb-2">
+                            <div class="trans_type_data">-<%= number_with_precision(number_to_currency(@transaction.bank_fee.to_f),precision: 2, delimeter: ',') %></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 pt-2 pb-2">
+                            <div class="trans_type_data">Reserve Money</div>
+                        </div>
+                        <div class="col-lg-6 pt-2 pb-2">
+                            <div class="trans_type_data">-<%= number_with_precision(number_to_currency(@transaction.reserve_money.to_f),precision: 2, delimeter: ',') %></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 pt-2 pb-2">
+                            <div class="trans_type_data font-weight-bold">Total Net</div>
+                        </div>
+                        <div class="col-lg-6 pt-2 pb-2">
+                            <div class="trans_type_data font-weight-bold"><%= number_with_precision(number_to_currency(@transaction.net_amount),precision: 2, delimeter: ',') %></div>
+                        </div>
+                    </div>
+                    <!-- Payment Information End -->
+                    <% if @card.present? %>
+                        <!-- Card Information Start -->
+                        <div class="head text-center mt-2 mb-2">Card Information</div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="trans_card_head font-weight-bold">Cardholder Name</div>
+                                <div class="trans_card_data"><%= @card.user.first_name %></div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="trans_card_head font-weight-bold">Card Brand</div>
+                                <div class="trans_card_data"><%= @card.brand %></div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="trans_card_head font-weight-bold">Card Type</div>
+                                <div class="trans_card_data"><%= @card.card_type %></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="trans_card_head font-weight-bold">Expiration Date</div>
+                                <div class="trans_card_data"><%= @card.exp_date %></div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="trans_card_head font-weight-bold">First 6</div>
+                                <div class="trans_card_data"><%= @card.first6 %></div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="trans_card_head font-weight-bold">Last 4</div>
+                                <div class="trans_card_data"><%= @card.last4 %></div>
+                            </div>
+                        </div>
+                        <!-- Card Information End -->
+                    <% end %>
+                    <!-- Ledger Information Start -->
+                    <!-- <div class="head text-center mt-2 mb-2">Transaction Information</div>
+                    <div class="row mt-3 mb-3">
+                        <div class="col-lg-4">
+                            <div class="trans_card_head font-weight-bold">Transaction ID</div>
+                            <div class="trans_card_data" id="btn_copy" data-clipboard-text="<%= @transaction.ref_id %>"><%= @transaction.ref_id.first(6) %>... <i class="far fa-copy"></i></div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="trans_card_head font-weight-bold">Brand ID</div>
+                            <div class="trans_card_data" id="btn_copy"  data-clipboard-text="444ecbash444">444ecbash444 <i class="far fa-copy"></i></div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="trans_card_head font-weight-bold">Account (DBA)</div>
+                            <div class="trans_card_data">test_loc</div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3 mb-3">
+                        <div class="col-lg-4">
+                            <div class="trans_card_head font-weight-bold">URL Address</div>
+                            <div class="trans_card_data">127.0.0.1</div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="trans_card_head font-weight-bold">Transaction IP</div>
+                            <div class="trans_card_data">127.0.0.1</div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="trans_card_head font-weight-bold">Clerk ID</div>
+                            <div class="trans_card_data">---</div>
+                        </div>
+                    </div> -->
+                    <!-- Ledger Information Start -->
+
+                </div><!-- Transaction Detail Box End -->
+            </div><!-- Column End -->
+
+
+            <!-- Customer Information Start-->
+            <div class="col-md-5">
+                <div class="transaction_detail_box shadow">
+                    <div class="head text-center mt-2 mb-2">Customer Information</div>
+
+                    <div class="row mt-3 mb-3">
+                        <div class="col-lg-6">
+                            <div class="trans_card_head font-weight-bold">Customer Name</div>
+                            <div class="trans_card_data"><%= @sender.first_name %></div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="trans_card_head font-weight-bold">Phone Number</div>
+                            <div class="trans_card_data"><%= @sender.phone_number %></div>
+                        </div>
+
+                    </div>
+
+                    <div class="row mt-3 mb-3">
+                        <div class="col-lg-6">
+                            <div class="trans_card_head font-weight-bold">Email</div>
+                            <div class="trans_card_data"><%= @sender.email %></div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="trans_card_head font-weight-bold">Wallet ID</div>
+                            <div class="trans_card_data"><%= @sender.wallets.primary.first.id %></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Button trigger modal -->
+                <!-- <a href="#" class="btn btn-primary btn-refund-modal mt-3" data-toggle="modal" data-target="#exampleModal">Refund</a> -->
+                <% if !@transaction.refunded? %>
+                  <%= link_to "Refund",refund_merchant_sale_index_path(transaction_id: @transaction.ref_id), class: "btn btn-primary btn-refund-modal mt-3", remote: true %>
+                <% else %>
+                  <a href="#" class="btn btn-primary mt-3" >Refunded</a>
+                <% end %>
+
+
+            </div>
+            <!-- Customer Information End -->
+
+        </div>
+        <% end %>
+        <!-- Transaction Details End -->
+
+
+
+
+    </div>
+</div>
+<div id="refund_modal"></div>

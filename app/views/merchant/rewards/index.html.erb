@@ -1,0 +1,62 @@
+<div class="dashboard_main_page">
+<div class="container-fluid">
+ <div class="row text-center">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="welcom_heading">
+          Rewards </div>
+        <!-- <div class="small_head pl-1">Your Accounts Dashboard</div> -->
+      </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="transaction_history_table rewrd-table mt-5">
+                <table class="table table-striped shadow">
+                    <thead>
+                        <tr class="bg-tr">
+                            <!-- <th scope="col">Reward Id</th> -->
+                            <!-- <th scope="col">Payed</th> -->
+                            <th scope="col">Amount</th>
+                            <th scope="col">Get Reward</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @rewards&.each do |reward|%>
+                            <tr>
+                                <!-- <td><button class="tabel_status"><a href="#"><%#= reward.payed ? "Paid" : "No" %></a></button></td> -->
+                                <td><%= number_with_precision(number_to_currency(reward.amount.to_f), precision: 2, delimiter: ',') %></td>
+                                <% if reward.payed %>
+                                  <td><button class="tabel_status"><a href="#"><%= reward.payed ? "Paid" : "No" %></a></button></td>
+                                <% elsif !reward.payed && reward.amount >= @reward_amount  %>
+                                  <td><button class="tabel_status"><%= link_to "Get Reward", get_reward_merchant_reward_path(reward) %></button></td>
+                                <% else %>
+                                  <td><button class="tabel_status"><a href="#"><%= reward.payed ? "Paid" : "No" %></a></button></td>
+                                <% end %>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Pagination Start -->
+    <%== pagy_bootstrap_nav(@pagy) %>
+    <!-- <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center p-0 mt-3 mr-3">
+          <li class="page-item shadow-sm">
+            <a class="page-link" href="#" tabindex="-1">Previous</a>
+          </li>
+          <li class="page-item shadow-sm"><a class="page-link" href="#">1</a></li>
+          <li class="page-item shadow-sm"><a class="page-link" href="#">2</a></li>
+          <li class="page-item shadow-sm"><a class="page-link" href="#">3</a></li>
+          <li class="page-item shadow-sm">
+            <a class="page-link shadow-sm" href="#">Next</a>
+          </li>
+        </ul>
+      </nav> -->
+         <!-- Pagination End -->
+
+</div>
+</div>

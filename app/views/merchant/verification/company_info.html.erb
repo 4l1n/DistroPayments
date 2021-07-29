@@ -1,0 +1,103 @@
+<div class="col-lg-8 col-md-12 col-sm-12 pr-0">
+    <div class="company-info">
+        <div class="detail-box shadow mx-auto">
+            <h3>Tell us about your company</h3>
+            <p>DistroPayment makes it easy to collect Direct Debit payments from customers worldwide,
+                even for one-off or variable amounts.</p>
+            <%= form_for @company, url: save_company_detail_merchant_verification_index_path, method: :post do |form| %>
+                <%= form.hidden_field :id, value: @company&.id%>
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Select Country <span>*</span></label>
+                    <%= form.country_select :country, {}, {class: "form-control", id: "exampleFormControlSelect1", required: true} %>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Business Type <span>*</span></label>
+                    <%= form.select :business_type, Company.business_types.map{|e| [e.first.humanize, e.second]}, {include_blank: "Choose your business type"}, {class: "form-control",  required: true} %>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Industry <span>*</span></label>
+                    <%= form.select :industry, Company.industries.map{|e| [e.first.humanize, e.first]}, {include_blank: "Choose your industry type"}, {class: "form-control",  required: true} %>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">What Does Your Busines do ?
+                        </label>
+                    <%= form.text_area :buisness_work, class: "form-control"  %>
+
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">What is your company name ?</label>
+                    <%= form.text_field :name, class: "form-control", id: "exampleFormControlInput1", required: true %>
+
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">What is your vat registration number ? <span>*</span></label>
+                    <%= form.text_field :vat, class: "form-control", id: "exampleFormControlInput1", required: true %>
+
+                </div>
+
+
+            <!-- <form> -->
+                <div class="form-group mt-4">
+                    <label for="exampleFormControlInput1">Street Address <span>*</span></label>
+                    <%= form.text_field :address, class: "form-control", id: "exampleFormControlInput1", required: true %>
+
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">City <span>*</span></label>
+                    <%= form.text_field :city, class: "form-control", id: "exampleFormControlInput1", required: true %>
+
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Postcode <span>*</span></label>
+                    <%= form.text_field :postcode, class: "form-control", id: "exampleFormControlInput1", required: true %>
+                </div>
+
+                <div class="form-group">
+                    <label for="supportEmail">Support Email <span>*</span></label>
+                    <%= form.email_field :support_email,class: "form-control", required: true, placeholder: "support email" %>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-6 pl-0">
+                    <label for="phoneNumber">Phone Number <span>*</span></label>
+                    <br>
+                    <%= form.telephone_field :phone,class: "form-control", required: true %>
+                    </div>
+                </div>
+                <!-- <div class="form-group">
+                  <div class="row align-items-center">
+                  <div class="col-md-6 pl-0">
+                    <label for="phoneNumber">Verification Code (Please enter the verification code you received after input your phone number). <span>*</span></label>
+                    <br>
+                    <input type="text" name="otp" maxlength="6" class="form-control" required>
+                    </div>
+                      <div class="col-md-6 pl-0">
+                        <a href="#" class="btn btn-otp">Verify Otp</a>
+                      </div>
+                    </div>
+                </div> -->
+                <div class="form-group">
+                    <label for="website">Website <span>*</span></label>
+                    <%= form.text_field :website,class: "form-control", required: true, placeholder: "https://example.com" %>
+                </div>
+            <!-- </form> -->
+
+            <div class="d-flex align-items-center mt-5">
+                <!-- <a href="#" class="btn btn-continue">Continue</a> -->
+                <%= form.submit "Continue", class: "btn btn-continue" %>
+                <!-- <a href="#" class="go-back ml-3"><i class="fas fa-arrow-left"></i> go back a step</a> -->
+            </div>
+            <% end %>
+
+        </div>
+    </div>
+</div>
+<script>
+  $("#company_phone").on('blur', function(){
+    var phone = $(".iti__selected-dial-code").text() + $(this).val();
+    $.ajax({
+      url: "/merchant/verification/verify_phone",
+      data: {phone: phone}
+    })
+  })
+</script>

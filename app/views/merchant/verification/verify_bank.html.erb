@@ -1,0 +1,35 @@
+<div class="col-lg-8 col-md-12 col-sm-12 pr-0">
+                    <div class="verifyaccount-section">
+                        <div class="account-box shadow mx-auto">
+                            <h4>Verify Payout Account</h4>
+                            <p>DistroPayment makes it easy to collect Direct Debit payments from customers worldwide,
+                                even for one-off or variable amounts. We are built our plateform for both clients and
+                                developers with clear and andvanced api system for payment gateway code with Ruby.</p>
+
+
+                             <div class="account-data shadow">
+                                <h6>Verify your bank account</h6>
+                                <p>popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker</p>
+
+                                <div class="account-detail-data">
+                                    <div class="payeName">Account Holder name: <span><%= @bank&.user_name %></span></div>
+                                    <div class="iban">IBAN: <span><%= @bank&.iban %></span></div>
+                                    <div class="bic">Country Code: <span><%= @bank&.country %></span></div>
+                                    <div class="refrence">Bank Name: <span><%= @bank&.bank_name %></span></div>
+                                </div>
+
+                                <p class="mt-4">popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker</p>
+
+                            </div>
+
+                            <div class="d-flex align-items-center mt-5">
+                                <a href="<%= verification_status_merchant_verification_index_path %>" class="btn btn-continue" data-turbolinks="false">Continue</a>
+                                <a href="<%= bank_details_merchant_verification_index_path %>" class="go-back ml-3" data-turbolinks="false"><i class="fas fa-arrow-left"></i> go back a step</a>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+                </div>

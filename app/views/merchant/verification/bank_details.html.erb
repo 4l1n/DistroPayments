@@ -1,0 +1,45 @@
+<div class="col-lg-8 col-md-12 col-sm-12 pr-0">
+                    <div class="brand-section">
+                        <div class="brand-box shadow mx-auto">
+                            <h4>Bank Account Details</h4>
+                            <p>DistroPayment makes it easy to collect Direct Debit payments from customers worldwide,
+                                even for one-off or variable amounts. We are built our plateform for both clients and
+                                developers with clear and andvanced api system for payment gateway code with Ruby.</p>
+
+                            <div class="connect-bank">
+                                <h4>Add Euro Account</h4>
+                                <%= form_for @bank, url: save_bank_details_merchant_verification_index_path, method: :post do |form| %>
+                                  <%= form.hidden_field :id, value: @bank&.id %>
+                                    <div class="form-group mt-3">
+                                        <label for="accountHolderName">Account Holder Name <span>*</span></label>
+                                        <%= form.text_field :user_name, class: "form-control", id: "accountHolderName", required: true %>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Country <span>*</span></label>
+                                        <%= form.country_select :country, {}, {class: "form-control", id: "exampleFormControlSelect1", required: true} %>
+
+
+                                    </div>
+                                    <div class="form-group mt-3">
+                                        <label for="sortCode">Bank Name <span>*</span></label>
+                                        <%= form.text_field :bank_name, class: "form-control", id: "sortCode", required: true %>
+                                    </div>
+                                    <div class="form-group mt-3">
+                                        <label for="accountNumber">IBAN <span>*</span></label>
+                                        <%= form.text_field :iban, class: "form-control", id: "accountNumber", required: true %>
+                                    </div>
+                            </div>
+
+
+                            <div class="d-flex align-items-center mt-5">
+                                <%= form.submit "Continue", class: "btn btn-continue" %>
+                                <a href="<%= company_info_merchant_verification_index_path %>" class="go-back ml-3" data-turbolinks="false"><i class="fas fa-arrow-left"></i> go back a step</a>
+                            </div>
+                            <% end %>
+
+                        </div>
+                    </div>
+
+
+                </div>
